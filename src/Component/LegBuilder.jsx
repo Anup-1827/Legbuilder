@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import CreateLeg from './CreateLeg';
 
-function LegBuilder() {
-
+function LegBuilder(props) {
+  const {listJson, setListJson, allFields, setAllFields} = props
   const errorRef = useRef();
   const legRef = useRef();
 
@@ -16,7 +16,14 @@ function LegBuilder() {
     e.target.classList.add("active")
 
     if(e.target.children[0].value){
+      setAllFields({...allFields, [e.target.children[0].name]: e.target.children[0].value})
       document.getElementById('selectSegments').classList.remove('hide')
+      document.querySelector('.buttons').classList.remove('hide')
+
+      document.querySelectorAll('#selectSegments input').forEach(item=>{
+        item.value=""
+      })
+
     }
 
 
@@ -39,16 +46,45 @@ function LegBuilder() {
     }
 
     if(isValid){
+      const inputFields = {}
       legRef.current.classList.remove('hide')
 
       document.querySelectorAll('#selectSegments select').forEach(item=>{
         item.style.backgroundColor = "#375a9e"
         item.style.color ="white"
         item.disabled = true;
+        inputFields[item.name] = item.value
       })
+
+      document.querySelectorAll('#selectSegments input').forEach((input)=>{
+            inputFields[input.name] = input.value
+        }
+      )
 
       document.querySelector('.buttons').classList.add('hide')
       document.querySelector('.segments').classList.add('hide')
+
+
+      const allCheckbox = document.querySelectorAll('#legList input[type="checkbox"]')
+      const allInputTag  = document.querySelectorAll('#legList input[type="number"]')
+      const allSelectTag  = document.querySelectorAll('#legList select')
+  
+      allCheckbox.forEach(item=> {
+        item.checked = false
+        item.disabled = false
+      })
+      allInputTag.forEach(item=> {
+        item.value = ""
+        item.disabled = false
+      })
+      allSelectTag.forEach(item=> {
+        item.value = "None"
+        item.disabled = false
+      })
+
+      document.querySelector('.submitDiv').classList.remove('hide')
+
+      setAllFields({...allFields, ...inputFields})
 
     }
 
@@ -68,13 +104,15 @@ function LegBuilder() {
       item.style.color ="black"
       item.disabled = false;
     })
+
+    document.querySelector('.segments').classList.remove('hide')
+    document.querySelector('.addLegAgain').classList.add('hide')
+    legRef.current.classList.add('hide')
   }
 
   const handleError = ()=>{
     errorRef.current.classList.add('hide')
   }
-
-
 
   const handleInputChange = (e)=>{
     if(Number(e.target.value) <0){
@@ -89,11 +127,11 @@ function LegBuilder() {
         <div id="segmentOptions" className='segmentOptions' onClick={handleSegments}>
           <label className="segmentBtn btnFutures"  htmlFor="futures">
             Futures
-            <input value="1" className='hide' type="radio" name="segment" id="futures" />
+            <input value="Futures" className='hide' type="radio" name="segment" id="futures" />
           </label>
           <label className="segmentBtn btnOptions"  htmlFor="options">
             Options
-            <input value="2" className='hide' type="radio" name="segment" id="options" />
+            <input value="Options" className='hide' type="radio" name="segment" id="options" />
           </label>
         </div>
       </div>
@@ -161,8 +199,7 @@ function LegBuilder() {
       </div>
 
       <div ref={legRef} className="hide">
-        <CreateLeg/>
-      
+        <CreateLeg listJson={listJson} setListJson={setListJson} allFields={allFields} setAllFields={setAllFields} handleCancel={handleCancel}/>
       </div>
     </div>
   )

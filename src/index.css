@@ -16,8 +16,10 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    /* align-items: center; */
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+
 }
 
 .hide{
@@ -119,4 +121,16 @@ select{
 }
 .submitDiv{
     text-align: center;
+}
+
+.fetchData{
+    margin-top: 30px;
+    width: 80%;
+}
+
+.dataList{
+    background-color: var(--gray);
+    height: 400px;
+    overflow-y: scroll;
+
 }
