@@ -1,6 +1,6 @@
 :root{
     --primary-color: #375a9e;
-    --gray:#ced4da;
+    --gray:#ededed;
 }
 
 *{
@@ -9,24 +9,27 @@
     margin: 0;
     font-size: 13px;
 }
-
+.hide{
+    display: none;
+}
 .App{
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .hide{
-    display: none;
+    display: none !important;
     /* visibility: none; */
 }
-input{
+input, label, button{
     cursor: pointer;
 }
-label, button{
-    cursor: pointer;
+select{
+    border-radius: 10px;
+    padding: 2px;
 }
 .active{
     background-color: var(--primary-color) !important;
@@ -36,17 +39,39 @@ label, button{
 .legBuilder{
     background-color: var(--gray);
     padding: 20px 30px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 80%;
+
 }
 .segments{
     display: flex;
-    width: 225px;
-    justify-content: space-between;
+    width: 100%;
+    /* width: 225px; */
+    justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
+}
+
+.info{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.info div{
+    margin: 5px;
+    text-align: center;
 }
 
 .segmentBtn{
     background-color: white;
     padding: 5px 10px;
+}
+.segmentOptions{
+    margin-left: 20px;
 }
 .btnFutures{
     border-radius: 15px 0  0 15px;
@@ -54,13 +79,20 @@ label, button{
 .btnOptions{
     border-radius: 0 15px 15px 0;
 }
+#lot, #num{
+    width: 50px;
+}
 
+.buttons{
+    text-align: center;
+}
 .addLeg{
     color: white;
     background-color: var(--primary-color);
     border: 1px solid var(--primary-color);
     padding: 3px 30px;
     border-radius: 15px;
+    margin: 10px 5px;
 }
 
 .cancel{
@@ -68,4 +100,23 @@ label, button{
     border: 1px solid var(--primary-color);
     padding: 3px 30px;
     border-radius: 15px;
+    margin: 10px 5px;
+}
+#legList{
+    display: flex;
+    justify-content: center;
+}
+
+.legDiv{
+    margin:  5px 20px;
+}
+.childLeg{
+    padding: 10px 0;
+}
+.inputChild{
+    width: 50px;
+    margin: 0 10px;
+}
+.submitDiv{
+    text-align: center;
 }
