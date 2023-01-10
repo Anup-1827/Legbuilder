@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FetchData from "./Component/FetchData";
 import LegBuilder from "./Component/LegBuilder";
 import "./index.css"

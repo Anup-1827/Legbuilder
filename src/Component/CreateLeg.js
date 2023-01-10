@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import {BASE_URL} from '../config';
 import LegList from "../Json/LegsList"
 
